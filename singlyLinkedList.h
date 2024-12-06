@@ -161,15 +161,57 @@ public:
     return str;
   }
 
-  
-  // ------------------------------------------------------------
-  // TODO: put the functions you need to implement below this
-  // ------------------------------------------------------------
-  
+  T & get(int pos) {
+    assert(!isEmpty() && "trying to get position from empty list");
+    Node<T> *cur = first;
+    int acc = 0;
+    while (cur->getNext() != nullptr) {
+        if (acc == pos) {
+            return cur->getValue();
+        }
+        else {
+            cur=cur->getNext();
+            acc++;
+        }
+    }  
+    return cur->getValue();
+  }
 
+ int count(T & v){
+    assert(!isEmpty() && "trying to count from empty list");
+    Node<T> *cur = first;
+    int acc = 0;
+    int size = length;
+    while (size > 0) {
+        if (cur->getValue() == v)  {
+          acc++;
+          cur=cur->getNext();
+          size-=1;
+        }
+        else {
+          cur=cur->getNext();
+          size-=1;
+        }
+    }
+    return acc;
+  }
 
+  void remove(int pos) {
+    if (isEmpty() || pos>length) return;
+    else if (pos==0) return removeFirst();
+    else if (pos==length) return removeLast();
+    Node<T> *cur = first;
+    for (int i=0; i<pos-1; i++)  
+      cur = cur->getNext();
+    Node<T> *victim = cur->getNext();
+    cur->setNext(victim->getNext());
+    delete victim;
+    length--;
+  }
 
-  
+  void insert(int pos, const T & v) {
+    
+  }
 };
 
 
