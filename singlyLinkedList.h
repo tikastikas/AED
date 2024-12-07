@@ -210,7 +210,22 @@ public:
   }
 
   void insert(int pos, const T & v) {
-    
+    Node<T> *newNode = new Node<T>(v, nullptr); 
+    if (pos < 0 || pos > length) return;
+    else if (pos==0) {
+      addFirst(v);
+      return;
+    }
+    else if (pos==length) {
+      addLast(v);
+      return;
+    }
+    Node<T> *cur = first;
+    for (int i=0; i<(pos-1); i++)
+      cur = cur->getNext();
+    newNode->setNext(cur->getNext());
+    cur->setNext(newNode);
+    length++;
   }
 };
 
