@@ -194,5 +194,20 @@ public:
     if (depth==k) return 1;
     return nodesLevel(k, depth+1, n->left) + nodesLevel(k, depth+1, n->right);
   }
+
+  int countEven() {
+    return countEven(root);
+  }
+
+  bool isEven(int val) {
+    if ((val % 2)==0) return true;
+    return false;
+  }
+
+  int countEven(Node *n){
+    if (n == nullptr) return 0;
+    if (isEven(n->value)) return 1 + countEven(n->left) + countEven(n->right);
+    return countEven(n->left) + countEven(n->right);
+  }
 };
 #endif
