@@ -209,5 +209,18 @@ public:
     if (isEven(n->value)) return 1 + countEven(n->left) + countEven(n->right);
     return countEven(n->left) + countEven(n->right);
   }
+
+  std::vector<int> sumLevels() {
+    int h = height();
+    std::vector<int> result(h+1, 0);
+    sumLevels(0, root, result);
+    return result;
+  }
+  void sumLevels(int depth, Node *n, std::vector <int>& result) {
+    if (n == nullptr) return;
+    result[depth] += n->value;
+    sumLevels(depth + 1, n->left, result);
+    sumLevels(depth + 1, n->right, result);
+  }
 };
 #endif
