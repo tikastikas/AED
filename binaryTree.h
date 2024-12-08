@@ -184,5 +184,16 @@ public:
     }
     return n->value;
   }
+
+  int nodesLevel(int k) {
+    if (k==0) return 1;
+    return nodesLevel(k, 0, root);
+  }
+
+  int nodesLevel(int k, int depth, Node *n) {
+    if (n == nullptr) return 0;
+    else if (depth==k) return 1;
+    return nodesLevel(k, depth+1, n->left) + nodesLevel(k, depth+1, n->right);
+  }
 };
 #endif
