@@ -165,5 +165,14 @@ public:
     return acc;
     }
 
+  bool strict() {
+    return strict(root);
+  }
+
+  bool strict(Node *n) {
+    if (n->right != nullptr && n->left != nullptr) return strict(n->left) && strict(n->right);
+    else if (n->right == nullptr && n->left == nullptr) return true;
+    return false;
+  }
 };
 #endif
