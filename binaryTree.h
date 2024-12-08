@@ -174,5 +174,15 @@ public:
     else if (n->right == nullptr && n->left == nullptr) return true;
     return false;
   }
+
+  T & path(std::string s) {
+    Node *n = root;
+    if (s == "_") return n->value;
+    for (char c : s) {
+      if (c == 'L') n=n->left;
+      else if (c == 'R') n=n->right;
+    }
+    return n->value;
+  }
 };
 #endif
