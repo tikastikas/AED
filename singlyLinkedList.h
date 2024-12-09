@@ -227,6 +227,40 @@ public:
     cur->setNext(newNode);
     length++;
   }
+
+  void duplicate() {
+    Node<T> *cur = first;
+    while (cur!=nullptr) {
+      Node<T> *newNode = new Node<T>(cur->getValue(), cur->getNext());
+      newNode->setValue(cur->getValue());
+      newNode->setNext(cur->getNext());
+      cur->setNext(newNode);
+      cur=newNode->getNext();
+      length++;
+    }
+  }
+
+  void removeAll(const T & v){
+    while(first != nullptr && first->getValue()==v){
+      removeFirst();
+    }
+    if (first == nullptr) return;
+    Node<T> *cur = first->getNext();
+    Node<T> *prev = first;
+    while (cur!=nullptr){
+      if (cur->getValue() == v){
+        Node<T> *victim = cur;
+        cur=cur->getNext();
+        delete victim;
+        prev->setNext(cur);
+        length--;
+      }
+      else{
+        prev=cur;
+        cur=cur->getNext();
+      }
+    }
+  }
 };
 
 
