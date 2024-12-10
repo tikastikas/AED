@@ -222,5 +222,28 @@ public:
     sumLevels(depth + 1, n->left, result);
     sumLevels(depth + 1, n->right, result);
   }
+
+  int sumTotal(Node *n){
+    if (n == nullptr) return 0;
+    return n->value + sumTotal(n->left) + sumTotal(n->right);
+  }
+
+  std::string maxSum(){
+    Node *n = root;
+    std::string s = "";
+    while(n!=nullptr){
+      if(sumTotal(n->left)>sumTotal(n->right)) {
+        s+= 'L';
+        n = n->left;
+      } else if (sumTotal(n->left)<sumTotal(n->right)) {
+        s+= 'R';
+        n = n->right;
+      } else {
+        break;
+      }
+    }
+    return s;
+  }
+
 };
 #endif
